@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  username     String   @unique
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+
+  createdDebates  Debate[]     @relation("DebateCreator")
+  joinedDebates   Debate[]     @relation("DebateOpponent")
+  messages        Message[]
+  definitions     Definition[]
+  intentions      Intention[]
+}
+
+model Debate {
+  id          String   @id @default(cuid())
+  title       String
+  topic       String
+  description String?
+  inviteCode  String   @unique
+  status      String   @default("setup")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  creatorId  String
+  creator    User   @relation("DebateCreator", fields: [creatorId], references: [id])
+
+  opponentId String?
+  opponent   User?  @relation("DebateOpponent", fields: [opponentId], references: [id])
+
+  messages    Message[]
+  definitions Definition[]
+  intentions  Intention[]
+}
+
+model Message {
+  id         String   @id @default(cuid())
+  content    String
+  senderType String   @default("user")
+  createdAt  DateTime @default(now())
+
+  debateId String
+  debate   Debate @relation(fields: [debateId], references: [id], onDelete: Cascade)
+
+  senderId String?
+  sender   User?   @relation(fields: [senderId], references: [id])
+
+  aiAnalysis AiAnalysis?
+}
+
+model Definition {
+  id         String   @id @default(cuid())
+  term       String
+  definition String
+  status     String   @default("proposed")
+  createdAt  DateTime @default(now())
+
+  debateId   String
+  debate     Debate @relation(fields: [debateId], references: [id], onDelete: Cascade)
+
+  proposedById String
+  proposedBy   User   @relation(fields: [proposedById], references: [id])
+}
+
+model AiAnalysis {
+  id       String  @id @default(cuid())
+  issues   String  @default("[]")
+  summary  String
+  severity String  @default("none")
+  passed   Boolean @default(true)
+  createdAt DateTime @default(now())
+
+  messageId String  @unique
+  message   Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+}
+
+model Intention {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now())
+
+  debateId String
+  debate   Debate @relation(fields: [debateId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}

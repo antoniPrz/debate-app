@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DebateFlow 🎯
 
-## Getting Started
+Aplicación de debates moderados por IA que analiza argumentos en busca de falacias lógicas, ambigüedades, errores de razonamiento y sesgos cognitivos.
 
-First, run the development server:
+## Características
+
+- 💬 **Chat en tiempo real** - Debates asíncronos con polling
+- 🤖 **Análisis de IA** - GPT-4o-mini detecta falacias y errores lógicos
+- 📖 **Definiciones compartidas** - Panel colaborativo de términos clave
+- ⏸️ **Pausar/Reanudar** - Control total del flujo del debate
+- 🎨 **UI Premium** - Dark mode con glassmorphism y animaciones
+
+## Stack Tecnológico
+
+- **Frontend**: Next.js 16 (App Router) + React 19
+- **Backend**: Next.js API Routes
+- **Base de Datos**: SQLite + Prisma 6
+- **Autenticación**: NextAuth.js
+- **IA**: OpenAI API (GPT-4o-mini + Whisper)
+- **Estilos**: Vanilla CSS
+
+## Instalación Local
 
 ```bash
+# Clonar el repositorio
+git clone https://github.com/TU_USUARIO/debateflow.git
+cd debateflow/debate-app
+
+# Instalar dependencias
+npm install
+
+# Configurar variables de entorno
+cp .env.example .env
+# Editar .env con tus valores
+
+# Generar Prisma Client y migrar DB
+npx prisma generate
+npx prisma migrate dev --name init
+
+# Iniciar servidor de desarrollo
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Variables de Entorno
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Crea un archivo `.env` con:
 
-## Learn More
+```env
+DATABASE_URL="file:./dev.db"
+NEXTAUTH_SECRET="tu-secret-aleatorio-muy-largo"
+NEXTAUTH_URL="http://localhost:3000"
+OPENAI_API_KEY="sk-..."
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy en Render
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Ver [DEPLOY.md](./DEPLOY.md) para instrucciones completas.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Resumen rápido:**
+1. Sube el código a GitHub
+2. Crea un Web Service en Render
+3. Configura disco persistente en `/data` (1GB)
+4. Agrega variables de entorno
+5. Deploy automático
 
-## Deploy on Vercel
+## Uso
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Registrarse** - Crea una cuenta con email/password
+2. **Crear debate** - Define título, tema y descripción
+3. **Invitar oponente** - Comparte el código de 6 caracteres
+4. **Debatir** - Envía argumentos y recibe análisis de IA en tiempo real
+5. **Definir términos** - Propón y acuerda definiciones clave
+6. **Pausar/Finalizar** - Controla el flujo del debate
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Estructura del Proyecto
+
+```
+debate-app/
+├── src/
+│   ├── app/              # Pages y API routes
+│   │   ├── api/          # Endpoints REST
+│   │   ├── debate/       # Chat del debate
+│   │   ├── dashboard/    # Lista de debates
+│   │   └── ...
+│   ├── components/       # Componentes React
+│   ├── lib/              # Utilidades (Prisma, AI)
+│   └── generated/        # Prisma Client (auto-generado)
+├── prisma/
+│   └── schema.prisma     # Modelo de datos
+├── public/               # Assets estáticos
+└── ...
+```
+
+## Licencia
+
+MIT
+
+## Autor
+
+Tu nombre
