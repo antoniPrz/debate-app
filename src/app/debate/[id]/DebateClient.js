@@ -1019,22 +1019,21 @@ export default function DebateClient({ debate: initialDebate, initialMessages, u
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 85;
-            backdrop-filter: blur(2px);
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 200;
           }
 
           .debate-sidebar {
             position: fixed;
             top: 0;
             left: 0;
+            right: 0;
             bottom: 0;
-            width: 85%;
-            max-width: 340px;
-            z-index: 90;
+            width: 100%;
+            z-index: 210;
             transform: translateX(-100%);
             transition: transform 0.3s ease;
-            box-shadow: var(--shadow-lg);
+            background: var(--bg-primary);
           }
 
           .debate-sidebar.open {
@@ -1045,20 +1044,24 @@ export default function DebateClient({ debate: initialDebate, initialMessages, u
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: var(--spacing-md);
-            border-bottom: 1px solid var(--border-subtle);
-            background: var(--bg-tertiary);
+            padding: var(--spacing-lg);
+            border-bottom: 1px solid var(--border-medium);
+            background: var(--bg-secondary);
+          }
+
+          .sidebar-close-header span {
+            font-size: var(--font-size-lg);
             font-weight: 700;
-            font-size: var(--font-size-sm);
           }
 
           .sidebar-close-btn {
-            background: none;
-            border: 1px solid var(--border-subtle);
-            color: var(--text-secondary);
-            padding: 0.3rem 0.8rem;
+            padding: 0.6rem 1.4rem;
+            background: rgba(255, 107, 107, 0.15);
+            border: 1px solid rgba(255, 107, 107, 0.4);
+            color: var(--accent-danger);
             border-radius: var(--radius-md);
-            font-size: var(--font-size-xs);
+            font-size: var(--font-size-base);
+            font-weight: 600;
             cursor: pointer;
           }
 
@@ -1066,21 +1069,21 @@ export default function DebateClient({ debate: initialDebate, initialMessages, u
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: var(--spacing-xs);
+            gap: var(--spacing-sm);
             position: fixed;
             bottom: var(--spacing-xl);
             left: 50%;
             transform: translateX(-50%);
-            padding: 0.6rem 1.2rem;
+            padding: 0.75rem 1.5rem;
             border-radius: var(--radius-full);
             background: var(--gradient-primary);
             border: none;
             color: white;
-            font-size: var(--font-size-sm);
+            font-size: var(--font-size-base);
             font-weight: 600;
             cursor: pointer;
             z-index: 50;
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 4px 20px rgba(108, 92, 231, 0.4);
             white-space: nowrap;
           }
 
