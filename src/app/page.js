@@ -56,24 +56,24 @@ export default function HomePage() {
         <div className="hero-visual">
           <div className="demo-chat">
             <div className="demo-message demo-user1 slide-up">
-              <div className="demo-msg-header">👤 Antoni</div>
-              <p>Las teorías críticas son dogmáticas porque no tienen un criterio claro de verdad.</p>
+              <div className="demo-msg-header">👤 Daniel</div>
+              <p>La inteligencia artificial nunca podrá reemplazar completamente a los programadores porque carece de creatividad real.</p>
             </div>
             <div className="demo-analysis slide-up" style={{ animationDelay: "0.2s" }}>
               <div className="demo-analysis-header">
                 <span className="severity-medium">⚠️ Análisis IA</span>
               </div>
-              <p><strong>Ambigüedad detectada:</strong> "dogmáticas" requiere definición operativa. ¿Se refiere a resistencia a la refutación o a falta de evidencia?</p>
+              <p><strong>Ambigüedad detectada:</strong> &quot;creatividad real&quot; necesita definición. ¿Se refiere a originalidad, capacidad de abstracción, o pensamiento lateral?</p>
             </div>
             <div className="demo-message demo-user2 slide-up" style={{ animationDelay: "0.4s" }}>
-              <div className="demo-msg-header">🎓 Dr. Ferrer</div>
-              <p>La validez reflexiva no es subjetividad individual, sino acuerdo racional intersubjetivo.</p>
+              <div className="demo-msg-header">🎓 Elena</div>
+              <p>La creatividad en programación es en gran medida reconocimiento de patrones y combinación de soluciones existentes, algo en lo que la IA ya destaca.</p>
             </div>
             <div className="demo-analysis demo-pass slide-up" style={{ animationDelay: "0.6s" }}>
               <div className="demo-analysis-header">
                 <span className="severity-none">✅ Análisis IA</span>
               </div>
-              <p>Argumento válido. Distinción clara entre subjetividad y validación intersubjetiva.</p>
+              <p>Argumento válido. Presenta una distinción clara y responde directamente al punto planteado.</p>
             </div>
           </div>
         </div>
