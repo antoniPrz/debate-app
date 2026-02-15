@@ -254,8 +254,16 @@ export default function DebateClient({ debate: initialDebate, initialMessages, u
             <Navbar />
 
             <div className="debate-layout">
+                {/* Overlay para cerrar sidebar en mobile */}
+                {showDefinitions && (
+                    <div className="sidebar-overlay" onClick={() => setShowDefinitions(false)} />
+                )}
                 {/* Panel izquierdo - Info y Definiciones */}
                 <aside className={`debate-sidebar ${showDefinitions ? "open" : ""}`}>
+                    <div className="sidebar-close-header">
+                        <span>📋 Panel del Debate</span>
+                        <button onClick={() => setShowDefinitions(false)} className="sidebar-close-btn">✕ Cerrar</button>
+                    </div>
                     <div className="sidebar-section">
                         <h3 className="sidebar-title">📋 Debate</h3>
                         <h4 style={{ fontSize: "var(--font-size-base)", marginBottom: "var(--spacing-xs)" }}>
@@ -553,12 +561,14 @@ export default function DebateClient({ debate: initialDebate, initialMessages, u
                 </main>
 
                 {/* Toggle sidebar en mobile */}
-                <button
-                    className="sidebar-toggle"
-                    onClick={() => setShowDefinitions(!showDefinitions)}
-                >
-                    {showDefinitions ? "✕" : "📖"}
-                </button>
+                {!showDefinitions && (
+                    <button
+                        className="sidebar-toggle"
+                        onClick={() => setShowDefinitions(true)}
+                    >
+                        📋 Info & Definiciones
+                    </button>
+                )}
             </div>
 
             <style jsx>{`
@@ -982,22 +992,19 @@ export default function DebateClient({ debate: initialDebate, initialMessages, u
           flex-shrink: 0;
         }
 
+        /* Sidebar Close Header (mobile only) */
+        .sidebar-close-header {
+          display: none;
+        }
+
+        /* Sidebar Overlay (mobile only) */
+        .sidebar-overlay {
+          display: none;
+        }
+
         /* Sidebar Toggle Mobile */
         .sidebar-toggle {
           display: none;
-          position: fixed;
-          bottom: 80px;
-          right: var(--spacing-md);
-          width: 44px;
-          height: 44px;
-          border-radius: var(--radius-full);
-          background: var(--gradient-primary);
-          border: none;
-          color: white;
-          font-size: var(--font-size-lg);
-          cursor: pointer;
-          z-index: 50;
-          box-shadow: var(--shadow-lg);
         }
 
         @media (max-width: 768px) {
@@ -1005,25 +1012,76 @@ export default function DebateClient({ debate: initialDebate, initialMessages, u
             grid-template-columns: 1fr;
           }
 
+          .sidebar-overlay {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 85;
+            backdrop-filter: blur(2px);
+          }
+
           .debate-sidebar {
             position: fixed;
-            top: 60px;
+            top: 0;
             left: 0;
             bottom: 0;
-            width: 300px;
+            width: 85%;
+            max-width: 340px;
             z-index: 90;
             transform: translateX(-100%);
-            transition: transform var(--transition-base);
+            transition: transform 0.3s ease;
+            box-shadow: var(--shadow-lg);
           }
 
           .debate-sidebar.open {
             transform: translateX(0);
           }
 
+          .sidebar-close-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--border-subtle);
+            background: var(--bg-tertiary);
+            font-weight: 700;
+            font-size: var(--font-size-sm);
+          }
+
+          .sidebar-close-btn {
+            background: none;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            padding: 0.3rem 0.8rem;
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-xs);
+            cursor: pointer;
+          }
+
           .sidebar-toggle {
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: var(--spacing-xs);
+            position: fixed;
+            bottom: var(--spacing-xl);
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-full);
+            background: var(--gradient-primary);
+            border: none;
+            color: white;
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 50;
+            box-shadow: var(--shadow-lg);
+            white-space: nowrap;
           }
 
           .message-wrapper {
