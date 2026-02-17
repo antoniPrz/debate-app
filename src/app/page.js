@@ -120,12 +120,13 @@ export default function HomePage() {
       <style jsx>{`
         .hero {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: var(--spacing-3xl);
+          grid-template-columns: 1fr;
+          gap: var(--spacing-xl);
           align-items: center;
+          text-align: center;
           max-width: 1200px;
           margin: 0 auto;
-          padding: var(--spacing-3xl) var(--spacing-xl);
+          padding: var(--spacing-2xl) var(--spacing-md);
           min-height: calc(100vh - 70px);
           position: relative;
           z-index: 1;
@@ -143,7 +144,7 @@ export default function HomePage() {
         }
 
         .hero-title {
-          font-size: var(--font-size-5xl);
+          font-size: var(--font-size-3xl);
           font-weight: 800;
           line-height: 1.1;
           margin-bottom: var(--spacing-lg);
@@ -157,20 +158,22 @@ export default function HomePage() {
         }
 
         .hero-subtitle {
-          font-size: var(--font-size-lg);
+          font-size: var(--font-size-base);
           color: var(--text-secondary);
           line-height: 1.7;
           margin-bottom: var(--spacing-2xl);
-          max-width: 500px;
+          max-width: 100%;
         }
 
         .hero-actions {
           display: flex;
+          flex-direction: column;
           gap: var(--spacing-md);
+          justify-content: center;
         }
 
         .hero-visual {
-          position: relative;
+          display: none;
         }
 
         .demo-chat {
@@ -236,27 +239,27 @@ export default function HomePage() {
         }
 
         .features {
-          padding: var(--spacing-3xl) 0;
+          padding: var(--spacing-2xl) 0;
           position: relative;
           z-index: 1;
         }
 
         .section-title {
           text-align: center;
-          font-size: var(--font-size-3xl);
+          font-size: var(--font-size-2xl);
           font-weight: 800;
-          margin-bottom: var(--spacing-3xl);
+          margin-bottom: var(--spacing-2xl);
         }
 
         .features-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: 1fr;
           gap: var(--spacing-lg);
         }
 
         .feature-card {
           text-align: center;
-          padding: var(--spacing-2xl);
+          padding: var(--spacing-lg);
         }
 
         .feature-icon {
@@ -276,29 +279,48 @@ export default function HomePage() {
           line-height: 1.6;
         }
 
-        @media (max-width: 968px) {
+        /* Desktop expansion */
+        @media (min-width: 769px) {
           .hero {
-            grid-template-columns: 1fr;
-            text-align: center;
-            padding: var(--spacing-2xl) var(--spacing-md);
+            grid-template-columns: 1fr 1fr;
+            text-align: left;
+            gap: var(--spacing-3xl);
+            padding: var(--spacing-3xl) var(--spacing-xl);
           }
-          .hero-subtitle {
-            max-width: 100%;
-          }
-          .hero-actions {
-            justify-content: center;
-          }
-          .features-grid {
-            grid-template-columns: 1fr;
-          }
-        }
 
-        @media (max-width: 768px) {
           .hero-title {
-            font-size: var(--font-size-3xl);
+            font-size: var(--font-size-5xl);
           }
+
+          .hero-subtitle {
+            font-size: var(--font-size-lg);
+            max-width: 500px;
+          }
+
           .hero-actions {
-            flex-direction: column;
+            flex-direction: row;
+            justify-content: flex-start;
+          }
+
+          .hero-visual {
+            display: block;
+          }
+
+          .features {
+            padding: var(--spacing-3xl) 0;
+          }
+
+          .section-title {
+            font-size: var(--font-size-3xl);
+            margin-bottom: var(--spacing-3xl);
+          }
+
+          .features-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+
+          .feature-card {
+            padding: var(--spacing-2xl);
           }
         }
       `}</style>

@@ -164,11 +164,9 @@ export default function DashboardClient({ debates, userId, userName }) {
             <style jsx>{`
         .dashboard-header {
           display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          margin-bottom: var(--spacing-2xl);
-          flex-wrap: wrap;
+          flex-direction: column;
           gap: var(--spacing-md);
+          margin-bottom: var(--spacing-2xl);
         }
         .gradient-text {
           background: var(--gradient-primary);
@@ -178,7 +176,7 @@ export default function DashboardClient({ debates, userId, userName }) {
         }
         .debates-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+          grid-template-columns: 1fr;
           gap: var(--spacing-lg);
         }
         .debate-card {
@@ -207,19 +205,27 @@ export default function DashboardClient({ debates, userId, userName }) {
           align-items: center;
           justify-content: center;
           z-index: 200;
-          padding: var(--spacing-lg);
+          padding: var(--spacing-md);
         }
         .modal-content {
           width: 100%;
           max-width: 440px;
-          padding: var(--spacing-2xl);
+          padding: var(--spacing-lg);
         }
-        @media (max-width: 768px) {
+        @media (min-width: 769px) {
           .dashboard-header {
-            flex-direction: column;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
           }
           .debates-grid {
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+          }
+          .modal-overlay {
+            padding: var(--spacing-lg);
+          }
+          .modal-content {
+            padding: var(--spacing-2xl);
           }
         }
       `}</style>

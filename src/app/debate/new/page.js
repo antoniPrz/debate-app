@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 
@@ -43,11 +44,15 @@ export default function NewDebatePage() {
         <div className="page">
             <Navbar />
 
-            <div className="container" style={{ paddingTop: "var(--spacing-2xl)", maxWidth: "640px" }}>
-                <h1 style={{ fontSize: "var(--font-size-3xl)", fontWeight: 800, marginBottom: "var(--spacing-sm)" }}>
+            <div className="container new-debate-container">
+                <Link href="/dashboard" className="back-link-mobile">
+                    ← Volver al Dashboard
+                </Link>
+
+                <h1 className="page-title">
                     Nuevo Debate
                 </h1>
-                <p style={{ color: "var(--text-secondary)", marginBottom: "var(--spacing-2xl)" }}>
+                <p className="page-subtitle">
                     Define el tema y crea un espacio para debatir con rigor
                 </p>
 
@@ -116,6 +121,47 @@ export default function NewDebatePage() {
                     </form>
                 </div>
             </div>
+
+            <style jsx>{`
+                .new-debate-container {
+                    padding-top: var(--spacing-xl);
+                    max-width: 640px;
+                }
+                
+                .page-title {
+                    font-size: var(--font-size-2xl);
+                    font-weight: 800;
+                    margin-bottom: var(--spacing-sm);
+                }
+                
+                .page-subtitle {
+                    color: var(--text-secondary);
+                    margin-bottom: var(--spacing-xl);
+                    font-size: var(--font-size-base);
+                }
+
+                .back-link-mobile {
+                    display: inline-block;
+                    margin-bottom: var(--spacing-md);
+                    color: var(--text-secondary);
+                    font-size: var(--font-size-sm);
+                    text-decoration: none;
+                }
+
+                @media (min-width: 769px) {
+                    .new-debate-container {
+                        padding-top: var(--spacing-2xl);
+                    }
+                    
+                    .page-title {
+                        font-size: var(--font-size-3xl);
+                    }
+
+                    .back-link-mobile {
+                        display: none; /* Navbar already has back button on desktop/tablet */
+                    }
+                }
+            `}</style>
         </div>
     );
 }
